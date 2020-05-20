@@ -98,6 +98,7 @@ class _MyHomePageState extends State<MyHomePage> {
             SizedBox(height: 10,),
             Text("custom input",style: TextStyle(color: Colors.black,fontSize: 18),),
             SizedBox(height: 10,),
+            buildCustomTF(),
 
           ],
         ),
@@ -109,4 +110,84 @@ class _MyHomePageState extends State<MyHomePage> {
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
+
+  TextEditingController editingController;
+
+  Widget buildCustomTF(){
+    TextField textField = TextField(
+
+      controller: editingController,
+      onChanged: (text){},
+      decoration: InputDecoration(
+        fillColor: Colors.orange,
+        filled: true,
+        contentPadding: EdgeInsets.all(0),
+        border: InputBorder.none,
+      ),
+    );
+    Widget hint = Text(
+      "hint message",style: TextStyle(color: Colors.red,fontSize: 15),
+    );
+
+    return Container(
+      alignment: Alignment.center,
+      color: Colors.grey,
+      width: 200,
+      height: 50,
+      padding: EdgeInsets.all(4),
+      child: CustomTextField(textField, hint),
+    );
+
+  }
+
 }
+
+
+class CustomTextField extends StatefulWidget{
+
+  final TextField textField;
+  final Widget hint;
+
+
+
+  CustomTextField(this.textField, this.hint);
+
+  @override
+  State<StatefulWidget> createState() {
+    return CustomTextFieldState();
+
+  }
+
+}
+
+class CustomTextFieldState extends State<CustomTextField>{
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      alignment: Alignment.centerLeft,
+      children: <Widget>[
+        widget.textField,
+        IgnorePointer(
+          child: Padding(
+            padding: EdgeInsets.all(8),
+            child: widget.hint,
+          ),
+        )
+      ],
+    );
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

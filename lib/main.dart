@@ -31,6 +31,8 @@ class MyApp extends StatelessWidget {
   }
 }
 
+typedef SetHint = void Function(bool status);
+
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
@@ -113,11 +115,23 @@ class _MyHomePageState extends State<MyHomePage> {
 
   TextEditingController editingController;
 
+
+
   Widget buildCustomTF(){
     TextField textField = TextField(
 
       controller: editingController,
-      onChanged: (text){},
+      onChanged: (text){
+        if(text != null && text.isNotEmpty){
+          setState(() {
+
+          });
+        }else{
+          setState(() {
+
+          });
+        }
+      },
       decoration: InputDecoration(
         fillColor: Colors.orange,
         filled: true,
@@ -135,7 +149,7 @@ class _MyHomePageState extends State<MyHomePage> {
       width: 200,
       height: 50,
       padding: EdgeInsets.all(4),
-      child: CustomTextField(textField, hint),
+      child: CustomTextField(textField, hint,),
     );
 
   }
